@@ -11,7 +11,7 @@ import os
 
 app = Flask(__name__)
 
-# Configurations (Replace with your actual DB credentials)
+# Configurations
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
@@ -179,6 +179,7 @@ def login():
         return jsonify({'message': str(e)}), 500  # Returns the real error message in response
 
 
+
 # CRUD Operations for Products
 #Add a new product
 @app.route('/products', methods=['POST'])
@@ -236,7 +237,9 @@ def get_products():
         return jsonify({'products': product_list}), 200
     except Exception as e:
         return jsonify({'message': 'An error occurred while retrieving products'}), 500
-#Update a product by id
+
+
+#Update a product by its id
 @app.route('/products/<int:product_id>', methods=['PUT'])
 @token_required
 def update_product(product_id):
@@ -251,7 +254,7 @@ def update_product(product_id):
     except Exception as e:
         return jsonify({'message': 'An error occurred while updating the product'}), 500
 
-#Delete a product by id
+#Delete a product by its id
 @app.route('/products/<int:product_id>', methods=['DELETE'])
 @token_required
 def delete_product(product_id):
